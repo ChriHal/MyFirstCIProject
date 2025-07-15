@@ -2,6 +2,7 @@
 # Visual Studio
 # -------------------------------
 .vs/
+**/vs/
 *.user
 *.suo
 *.userosscache
@@ -12,6 +13,8 @@
 # -------------------------------
 bin/
 obj/
+**/bin/
+**/obj/
 [Bb]uild/
 [Ll]og/
 [Ll]ogs/
