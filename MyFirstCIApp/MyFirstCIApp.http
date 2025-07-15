@@ -1,0 +1,6 @@
+@MyFirstCIApp_HostAddress = http://localhost:5161
+
+GET {{MyFirstCIApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

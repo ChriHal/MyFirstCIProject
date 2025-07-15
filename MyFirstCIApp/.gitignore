@@ -1,0 +1,85 @@
+# -------------------------------
+# Visual Studio
+# -------------------------------
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# -------------------------------
+# Build results
+# -------------------------------
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+
+# -------------------------------
+# NuGet packages
+# -------------------------------
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# -------------------------------
+# Dotnet CLI
+# -------------------------------
+*.dbmdl
+*.bak
+*.sql
+*.sqlite
+*.sqlite3
+
+# -------------------------------
+# ASP.NET files
+# -------------------------------
+wwwroot/
+node_modules/
+bower_components/
+dist/
+out/
+
+# -------------------------------
+# Azure and Publish artifacts
+# -------------------------------
+.publish/
+.publishsettings
+*.azurePubxml
+
+# -------------------------------
+# Test results
+# -------------------------------
+TestResults/
+*.coverage
+*.coveragexml
+*.log
+*.trx
+
+# -------------------------------
+# GitHub workflows (keep)
+# -------------------------------
+!.github/
+!.github/workflows/
+
+# -------------------------------
+# OS-specific files
+# -------------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------------
+# Rider / VS Code
+# -------------------------------
+.idea/
+.vscode/
+
+# -------------------------------
+# dotenv / secrets
+# -------------------------------
+.env
+.env.*
+secrets.json
