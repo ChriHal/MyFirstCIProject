@@ -1,23 +1,23 @@
-name: .NET CI
+﻿name: .NET Build & Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x' # ändra om du använder en annan version
+        dotnet-version: 9.0.x
 
     - name: Restore dependencies
       run: dotnet restore
@@ -25,5 +25,5 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Run tests
+    - name: Test
       run: dotnet test --no-build --verbosity normal
