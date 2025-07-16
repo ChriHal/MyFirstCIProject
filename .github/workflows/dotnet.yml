@@ -1,29 +1,30 @@
-﻿name: .NET Build & Test
+﻿# GitHub Actions Workflow for building and testing a .NET project
+name: .NET Build & Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ]       # Körs vid push till master
   pull_request:
-    branches: [ master ]
+    branches: [ master ]       # Körs vid pull request mot master
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest     # Kör på senaste Ubuntu-miljö
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Check out code
+      uses: actions/checkout@v4  # Hämtar projektets kod
 
-    - name: Setup .NET
+    - name: Setup .NET 9.0
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 9.0.x   # Använder .NET 9 (preview eller aktuell version)
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore       # Hämtar beroenden (NuGet etc.)
 
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build the project
+      run: dotnet build --no-restore  # Bygger projektet utan att hämta beroenden igen
 
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal  # Kör tester utan att bygga om
