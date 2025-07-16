@@ -1,5 +1,6 @@
 # MyFirstCIProject 🚀
-
+## SonarCloud Integration
+CI/CD med kodanalys aktiverat 🎯
 ![.NET Build & Test](https://github.com/ChriHal/MyFirstCIProject/actions/workflows/dotnet.yml/badge.svg)
 
 Ett litet testprojekt i .NET med automatiserad build och test via GitHub Actions.  
@@ -27,3 +28,6 @@ git clone https://github.com/ChriHal/MyFirstCIProject.git
 cd MyFirstCIProject
 dotnet build
 dotnet test
+
+SonarQube 
+CI-Token 48786006261778be2af4ec1d8feab910a4dfddbc
