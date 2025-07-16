@@ -1,30 +1,46 @@
-﻿# GitHub Actions Workflow for building and testing a .NET project
-name: .NET Build & Test
+﻿name: .NET Build, Test & SonarCloud
 
 on:
   push:
-    branches: [ master ]       # Körs vid push till master
+    branches: [ master ]
   pull_request:
-    branches: [ master ]       # Körs vid pull request mot master
+    branches: [ master ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest     # Kör på senaste Ubuntu-miljö
+    runs-on: ubuntu-latest
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v4  # Hämtar projektets kod
+      uses: actions/checkout@v4
 
-    - name: Setup .NET 9.0
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x   # Använder .NET 9 (preview eller aktuell version)
+        dotnet-version: 9.0.x
 
     - name: Restore dependencies
-      run: dotnet restore       # Hämtar beroenden (NuGet etc.)
+      run: dotnet restore
 
-    - name: Build the project
-      run: dotnet build --no-restore  # Bygger projektet utan att hämta beroenden igen
+    - name: Install SonarCloud scanner
+      run: dotnet tool install --global dotnet-sonarscanner
+
+    - name: Begin SonarCloud analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        dotnet-sonarscanner begin /k:"ChriHal_MyFirstCIProject" /o:"ChrilleH" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+    - name: Build project
+      run: dotnet build --no-restore
+
+    - name: Format code
+      run: dotnet format --verify-no-changes
 
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal  # Kör tester utan att bygga om
+      run: dotnet test --no-build --verbosity normal
+
+    - name: End SonarCloud analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
